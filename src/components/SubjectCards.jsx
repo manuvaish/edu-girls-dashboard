@@ -1,8 +1,8 @@
 import React from 'react';
 
 const SUBJECT_CONFIG = {
-  Math:    { icon: '📐', accent: '#2563eb', light: '#eff6ff', dark: '#1e3a8a', ring: '#bfdbfe' },
-  English: { icon: '📖', accent: '#059669', light: '#ecfdf5', dark: '#064e3b', ring: '#a7f3d0' },
+  Math:    { icon: '📐', accent: '#15803d', light: '#f0fdf4', dark: '#14532d', ring: '#bbf7d0' },
+  English: { icon: '📖', accent: '#0d9488', light: '#f0fdfa', dark: '#134e4a', ring: '#99f6e4' },
   Science: { icon: '🔬', accent: '#7c3aed', light: '#f5f3ff', dark: '#2e1065', ring: '#ddd6fe' },
 };
 
@@ -92,7 +92,7 @@ export default function SubjectCards({ subjects, metric }) {
 export function SectionTitle({ title, subtitle }) {
   return (
     <div className="flex items-center gap-3 mb-5">
-      <div className="w-1 h-6 bg-blue-600 rounded-full shrink-0" />
+      <div className="w-1 h-6 bg-green-700 rounded-full shrink-0" />
       <div>
         <h2 className="text-lg font-bold text-slate-800 leading-none">{title}</h2>
         {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}

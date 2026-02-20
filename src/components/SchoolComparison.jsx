@@ -7,8 +7,8 @@ import { METRIC_META } from '../utils/processData';
 import { SectionTitle } from './SubjectCards';
 
 const BARS = [
-  { key: 'Math',    color: '#2563eb' },
-  { key: 'English', color: '#059669' },
+  { key: 'Math',    color: '#15803d' },
+  { key: 'English', color: '#0d9488' },
   { key: 'Science', color: '#7c3aed' },
 ];
 
@@ -24,7 +24,7 @@ export default function SchoolComparison({ data, metric }) {
   const meta = METRIC_META[metric];
 
   return (
-    <section className="bg-white rounded-2xl border border-blue-100 shadow-sm p-6">
+    <section className="bg-white rounded-2xl border border-green-100 shadow-sm p-6">
       <SectionTitle
         title="School Comparison"
         subtitle={`${meta.colHeader} per subject · All dates combined`}

@@ -16,7 +16,7 @@ export default function UploadScreen({ onFile, uploading, error }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-blue-900 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-green-950 to-green-900 flex flex-col items-center justify-center p-6">
 
       {/* Brand */}
       <div className="text-center mb-8">
@@ -24,16 +24,16 @@ export default function UploadScreen({ onFile, uploading, error }) {
           <span className="text-xl font-black text-white tracking-tight">EG</span>
         </div>
         <h1 className="text-3xl font-black text-white tracking-tight">Vimukti / Edu-GIRLS</h1>
-        <p className="text-blue-300 mt-1 text-sm">Student Assessment Intelligence Dashboard</p>
+        <p className="text-green-300 mt-1 text-sm">Student Assessment Intelligence Dashboard</p>
       </div>
 
       {/* Card */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
 
         {/* Card header strip */}
-        <div className="bg-blue-600 px-6 py-4">
+        <div className="bg-green-700 px-6 py-4">
           <h2 className="text-white font-bold text-base">Upload Assessment Data</h2>
-          <p className="text-blue-200 text-xs mt-0.5">
+          <p className="text-green-200 text-xs mt-0.5">
             Excel file → "Raw Table" sheet · Row 1 headers · Row 2+ data
           </p>
         </div>
@@ -43,8 +43,8 @@ export default function UploadScreen({ onFile, uploading, error }) {
           <div
             className={`border-2 border-dashed rounded-xl p-10 text-center mb-5 cursor-pointer transition-colors ${
               dragging
-                ? 'border-blue-400 bg-blue-50'
-                : 'border-slate-200 hover:border-blue-300 hover:bg-slate-50'
+                ? 'border-green-400 bg-green-50'
+                : 'border-slate-200 hover:border-green-300 hover:bg-slate-50'
             }`}
             onClick={() => inputRef.current.click()}
             onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
@@ -69,7 +69,7 @@ export default function UploadScreen({ onFile, uploading, error }) {
           <button
             onClick={() => inputRef.current.click()}
             disabled={uploading}
-            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 rounded-xl bg-green-700 hover:bg-green-800 active:bg-green-900 text-white font-bold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {uploading ? (
               <span className="flex items-center justify-center gap-2">

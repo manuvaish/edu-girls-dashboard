@@ -14,7 +14,7 @@ export default function Controls({
           <select
             value={selectedSchool ?? ''}
             onChange={e => onSchoolChange(e.target.value || null)}
-            className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer"
           >
             <option value="">All Schools</option>
             {schools.map(s => (
@@ -37,7 +37,7 @@ export default function Controls({
                 onClick={() => onMetricChange(value)}
                 className={`px-4 py-1.5 transition-colors ${i > 0 ? 'border-l border-slate-200' : ''} ${
                   metric === value
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-green-700 text-white'
                     : 'bg-white text-slate-600 hover:bg-slate-50'
                 }`}
               >

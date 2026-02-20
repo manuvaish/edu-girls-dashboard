@@ -7,11 +7,11 @@ function Stat({ label, value, sub, active }) {
         ? 'bg-white/20 border-white/40 ring-1 ring-white/30'
         : 'bg-white/10 border-white/20'
     }`}>
-      <div className="text-xs text-blue-200 font-semibold uppercase tracking-widest mb-1">
+      <div className="text-xs text-green-200 font-semibold uppercase tracking-widest mb-1">
         {active && <span className="mr-1 text-white/70">▶</span>}{label}
       </div>
       <div className="text-2xl font-black text-white leading-none">{value ?? '—'}</div>
-      {sub && <div className="text-xs text-blue-300 mt-1">{sub}</div>}
+      {sub && <div className="text-xs text-green-300 mt-1">{sub}</div>}
     </div>
   );
 }
@@ -20,7 +20,7 @@ export default function DashboardHeader({ stats, onUpload, uploading, metric }) 
   const inputRef = useRef(null);
 
   return (
-    <header className="bg-gradient-to-r from-slate-950 via-blue-950 to-blue-900 text-white">
+    <header className="bg-gradient-to-r from-slate-950 via-green-950 to-green-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Top row: branding + upload button */}
@@ -28,13 +28,13 @@ export default function DashboardHeader({ stats, onUpload, uploading, metric }) 
           <div>
             <div className="flex items-center gap-2.5 mb-1.5">
               <div className="w-7 h-7 rounded-lg bg-white/15 border border-white/25 flex items-center justify-center text-xs font-black">EG</div>
-              <span className="text-blue-300 text-xs font-semibold uppercase tracking-widest">Assessment Dashboard</span>
+              <span className="text-green-300 text-xs font-semibold uppercase tracking-widest">Assessment Dashboard</span>
             </div>
             <h1 className="text-3xl font-black tracking-tight">Vimukti / Edu-GIRLS</h1>
-            <p className="text-blue-200 text-sm mt-1">
+            <p className="text-green-200 text-sm mt-1">
               Latest assessment:&nbsp;
               <span className="font-semibold text-white">{stats.latestDateDisplay || '—'}</span>
-              <span className="text-blue-400 ml-3 text-xs">{stats.totalRecords?.toLocaleString()} total records</span>
+              <span className="text-green-400 ml-3 text-xs">{stats.totalRecords?.toLocaleString()} total records</span>
             </p>
           </div>
 

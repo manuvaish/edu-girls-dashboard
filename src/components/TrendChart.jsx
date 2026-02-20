@@ -7,8 +7,8 @@ import { SectionTitle } from './SubjectCards';
 import { METRIC_META } from '../utils/processData';
 
 const LINES = [
-  { key: 'Math',    color: '#2563eb' },
-  { key: 'English', color: '#059669' },
+  { key: 'Math',    color: '#15803d' },
+  { key: 'English', color: '#0d9488' },
   { key: 'Science', color: '#7c3aed' },
 ];
 
