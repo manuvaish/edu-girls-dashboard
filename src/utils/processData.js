@@ -180,6 +180,28 @@ export function getSchoolComparison(data, metric = 'scaledScore') {
   });
 }
 
+/** Quartile avg vs total avg over time. quartile = 1|2|3|4 */
+export function getQuartileGapData(data, quartile = 1, metric = 'scaledScore') {
+  return getUniqueDates(data).map(dateKey => {
+    const rows    = data.filter(r => r.dateKey === dateKey);
+    const allVals = rows.map(r => r[metric]).filter(v => v > 0).sort((a, b) => a - b);
+    const n       = allVals.length;
+    const totalAvg = n ? round1(avg(allVals)) : null;
+
+    if (n < 4) {
+      return { dateLabel: formatDateShort(dateKey), totalAvg, quartileAvg: null, gap: null };
+    }
+
+    const lo   = Math.floor(((quartile - 1) / 4) * n);
+    const hi   = Math.floor((quartile / 4) * n);
+    const qVals = allVals.slice(lo, Math.max(hi, lo + 1));
+    const qAvg  = round1(avg(qVals));
+    const gap   = totalAvg !== null && qAvg !== null ? round1(qAvg - totalAvg) : null;
+
+    return { dateLabel: formatDateShort(dateKey), totalAvg, quartileAvg: qAvg, gap };
+  });
+}
+
 /** Cell colour for the heatmap. */
 export function getCellStyle(value, min, max) {
   if (value === null) return { bg: '#f8fafc', text: '#cbd5e1' };

@@ -13,6 +13,7 @@ import SchoolComparison  from './components/SchoolComparison';
 import TrendChart        from './components/TrendChart';
 import ClassHeatmap      from './components/ClassHeatmap';
 import TopBottomTable    from './components/TopBottomTable';
+import QuartileGapChart  from './components/QuartileGapChart';
 
 const STORAGE_KEY = 'edu-girls-data-v1';
 
@@ -95,7 +96,8 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <SubjectCards   subjects={subjectStats} metric={metric} />
         {showComparison && <SchoolComparison data={comparisonData} metric={metric} />}
-        <TrendChart     data={trendData} metric={metric} />
+        <TrendChart      data={trendData} metric={metric} />
+        <QuartileGapChart data={filteredData} metric={metric} />
         <ClassHeatmap   matrix={heatmap.matrix} min={heatmap.min} max={heatmap.max} metric={metric} />
         <TopBottomTable top={top} bottom={bottom} metric={metric} />
       </main>
