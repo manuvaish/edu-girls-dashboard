@@ -20,33 +20,54 @@ const tooltipStyle = {
   labelStyle: { fontWeight: '700', color: '#1e293b', marginBottom: '4px' },
 };
 
+const selectClass = "text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer";
+
 export default function QuartileGapChart({ data, metric }) {
-  const [quartile, setQuartile] = useState(1);
+  const [quartile,       setQuartile]       = useState(1);
+  const [selectedClass,  setSelectedClass]  = useState('');
+  const [selectedSubject, setSelectedSubject] = useState('');
 
-  const meta   = METRIC_META[metric] ?? METRIC_META.scaledScore;
-  const qInfo  = QUARTILES.find(x => x.q === quartile);
-  const chartData = getQuartileGapData(data, quartile, metric);
+  const meta  = METRIC_META[metric] ?? METRIC_META.scaledScore;
+  const qInfo = QUARTILES.find(x => x.q === quartile);
 
+  // Unique classes sorted numerically
+  const classes = [...new Set(data.map(r => r.class).filter(Boolean))].sort((a, b) => {
+    const na = Number(a), nb = Number(b);
+    return !isNaN(na) && !isNaN(nb) ? na - nb : a.localeCompare(b);
+  });
+
+  // Unique subjects present in data
+  const subjects = [...new Set(data.map(r => r.subject).filter(Boolean))].sort();
+
+  // Apply slicers before computing quartiles
+  const slicedData = data.filter(r =>
+    (!selectedClass   || r.class   === selectedClass) &&
+    (!selectedSubject || r.subject === selectedSubject)
+  );
+
+  const chartData     = getQuartileGapData(slicedData, quartile, metric);
   const latestWithGap = [...chartData].reverse().find(d => d.gap !== null);
   const latestGap     = latestWithGap?.gap ?? null;
 
   return (
     <section className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
 
-      {/* Header row */}
-      <div className="flex items-center justify-between gap-4 mb-5 flex-wrap">
-        <div className="flex items-center gap-3">
-          <div className="w-1 h-6 bg-green-700 rounded-full shrink-0" />
-          <div>
-            <h2 className="text-lg font-bold text-slate-800 leading-none">Quartile Gap Analysis</h2>
-            <p className="text-xs text-slate-400 mt-0.5">
-              {qInfo.label} avg {meta.label} vs all-student average
-            </p>
-          </div>
+      {/* Title */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-1 h-6 bg-green-700 rounded-full shrink-0" />
+        <div>
+          <h2 className="text-lg font-bold text-slate-800 leading-none">Quartile Gap Analysis</h2>
+          <p className="text-xs text-slate-400 mt-0.5">
+            {qInfo.label} avg {meta.label} vs all-student average
+          </p>
         </div>
+      </div>
 
-        {/* Quartile selector */}
-        <div className="flex rounded-lg border border-slate-200 overflow-hidden text-xs font-semibold shrink-0">
+      {/* Controls row */}
+      <div className="flex items-center gap-3 mb-5 flex-wrap">
+
+        {/* Quartile toggle */}
+        <div className="flex rounded-lg border border-slate-200 overflow-hidden text-xs font-semibold">
           {QUARTILES.map(({ q, label }, i) => (
             <button
               key={q}
@@ -60,6 +81,36 @@ export default function QuartileGapChart({ data, metric }) {
               Q{q}
             </button>
           ))}
+        </div>
+
+        {/* Class slicer */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-slate-500 font-medium">Class:</span>
+          <select
+            value={selectedClass}
+            onChange={e => setSelectedClass(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">All</option>
+            {classes.map(c => (
+              <option key={c} value={c}>Class {c}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Subject slicer */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-slate-500 font-medium">Subject:</span>
+          <select
+            value={selectedSubject}
+            onChange={e => setSelectedSubject(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">All</option>
+            {subjects.map(s => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
         </div>
       </div>
 
